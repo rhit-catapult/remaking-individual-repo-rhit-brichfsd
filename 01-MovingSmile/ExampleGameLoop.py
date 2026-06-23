@@ -7,16 +7,10 @@ import sys
 pygame.init()
 
 # Let's create a caption for the game window
-pygame.display.set_caption("Hello World")
-# TODO 00: Change the window caption to say your name.
-
-# Now the screen is where all the magic is going to happen. Our screen will
-# have a width of 640 pixels and a height of 480 pixels. The (0,0) point will
-# be at the top left of our screen. 
+pygame.display.set_caption("Sam Brichford")
 screen = pygame.display.set_mode((640, 480))
 # TODO 05: Change the window size, make sure your circle code still works.
 
-# This is a loop that will run forever, simply because True is always true
 while True:
     # Here's another loop inside of the first loop. Notice the indentation,
     # moving one tab width into the while loop makes this statement part of the
@@ -36,13 +30,13 @@ while True:
 
         # Additional interactions with events
 
-    # TODO 01: Make the background white by uncommenting the line below
-    # screen.fill(pygame.Color("Gray"))
+    
+    screen.fill(pygame.Color("White"))
 
     # Draw things on the screen
 
     # TODO 02: Try to draw a circle (any size, any color, anywhere)
-    # pygame.draw.circle(screen, color, pos, radius, width(optional)  )
+    pygame.draw.circle(screen, pygame.Color("light blue"), (230, 100),100)
 
     # TODO 03: Try to draw a red circle in the middle of the screen with a radius 100
     # pygame.draw.circle(screen, color, pos, radius, width(optional)  )
