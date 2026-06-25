@@ -18,6 +18,9 @@ def main():
     clock = pygame.time.Clock()
 
     # TODO: Create an instance of the Ball class called ball1
+    class Ball:
+        def __init__(self):
+            pass
 
     while True:
         for event in pygame.event.get():

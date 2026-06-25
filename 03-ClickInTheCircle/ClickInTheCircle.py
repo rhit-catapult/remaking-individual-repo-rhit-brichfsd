@@ -7,7 +7,7 @@ def distance(point1, point2):
     point2_x = point2[0]
     point1_y = point1[1]
     point2_y = point2[1]
-
+    return math.sqrt((point2_x-point1_x) ** 2 + (point2_y - point1_y) ** 2)
     # TODO 4: Return the actual distance between point 1 and point 2.
     #  Hint: you will need the math library for the sqrt function.
     #       distance = sqrt(   (delta x) ** 2 + (delta y) ** 2  )
@@ -30,16 +30,28 @@ def main():
     circle_center = (screen.get_width() // 2, screen.get_height() // 2)
     circle_radius = 50
     circle_border_width = 3
-
     message_text = ''
-
+    counter = 0
+    pygame.mixer.music.load("drums.wav")
     while True:
-
+        bullseye = bool
         for event in pygame.event.get():
+            
             if event.type == pygame.QUIT:
                 sys.exit()
-
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                #pygame.draw.circle(screen,"gray",pygame.mouse.get_pos(),10)
+                distance_from_circle = distance(circle_center,event.pos)
+                if distance_from_circle <= circle_radius:
+                    message_text = 'Bullseye'
+                    pygame.mixer.music.play(-1)
+                    counter += 1
+                if distance_from_circle > circle_radius:
+                    message_text = 'You Missed'
+                    pygame.mixer.music.stop()
+                    
             # TODO 2: For a MOUSEBUTTONDOWN event get the click position.
+            
                 # TODO 3: Determine the distance between the click position and the circle_center using the distance
                 # TODO 3:   function and save the result into a variable called distance_from_circle
                 # TODO 5: If distance_from_circle is less than or equal to circle_radius, set message_text to 'Bullseye!'
@@ -48,14 +60,18 @@ def main():
                 # TODO 10: Stop playing the music if the click is outside the circle
 
         screen.fill(pygame.Color("Black"))
-
-        # TODO 1: Draw the circle using the screen, circle_color, circle_center, circle_radius, and circle_border_width
-
+        
+        # Done 1: Draw the circle using the screen, circle_color, circle_center, circle_radius, and circle_border_width
+        pygame.draw.circle(screen, circle_color, (screen.get_width()/2, screen.get_height()/2),circle_radius, circle_border_width)
         # TODO 6: Create a text image (render the text) based on the message_text with the color (122, 237, 201)
-
+        message_caption = font.render(message_text, True, (122,237,201))
         screen.blit(instructions_image, (25, 25))
+        counter_text = f"Shots made :{counter}"
+        shots_made_caption = font.render(counter_text, True,(122,237,201))
         # TODO 7: Draw (blit) the message to the user that says 'Bullseye!' or 'You missed!'
-
+        screen.blit(shots_made_caption, (25,50))
+        screen.blit(message_caption, (25, 75))
+        
         pygame.display.update()
 
 
