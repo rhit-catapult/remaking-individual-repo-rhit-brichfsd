@@ -102,9 +102,9 @@ class Cloud:
     def rain(self):
         """ Adds a Raindrop to the array of raindrops so that it looks like the Cloud is raining. """
         # TODO 28: Append a new Raindrop to this Cloud's list of raindrops,
-        #for i in range(5):
-        raindrop = Raindrop(self.screen,random.randint(self.x,self.x+300),self.y+100)
-        self.raindrops.append(raindrop)
+        for i in range(5):
+            raindrop = Raindrop(self.screen,random.randint(self.x,self.x+300),self.y+100)
+            self.raindrops.append(raindrop)
         #     where the new Raindrop starts at:
         #       - x is a random integer between this Cloud's x and this Cloud's x + 300.
         #       - y is this Cloud's y + 100.

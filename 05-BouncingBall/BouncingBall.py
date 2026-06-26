@@ -14,20 +14,19 @@ class Ball:
             self.color = color
             self.x = x
             self.y = y
-            self.init_y = y
             self.radius = radius
             self.speed_x = speed_x
             self.speed_y = speed_y
         def move(self):
-            if self.init_y > self.screen.get_width():
-                return
-            self.y -= self.speed_y
+            self.y += self.speed_y
             
-            if self.y < self.screen.get_width()-self.radius and self.y > self.init_y:
+            if self.y > self.screen.get_width()-self.radius or self.y < 0:
                 self.speed_y = self.speed_y * -1
-                self.init_y = self.init_y*2
-                print(self.y)
-                print(self.init_y)
+            
+            self.x += self.speed_x
+            
+            if self.x > self.screen.get_width()-self.radius or self.x < 0:
+                self.speed_x = self.speed_x * -1
             
         def draw(self):
             pygame.draw.circle(self.screen,self.color,(self.x,self.y),self.radius)
@@ -41,8 +40,13 @@ def main():
     screen.fill(pygame.Color('gray'))
     clock = pygame.time.Clock()
     # TODO: Create an instance of the Ball class called ball1
-    ball = Ball(screen,'blue',50,50,10,0,1)
-    
+    colors = ['red','blue','green','yellow','pink','orange','purple','white','black']
+    balls = []
+    for i in range(100):
+        ball = Ball(screen,colors[random.randint(0,8)],random.randint(0,screen.get_width()-1),random.randint(0,screen.get_height()-1),random.randint(1,10),random.randint(-2,2),random.randint(-2,2))
+        balls.append(ball)
+
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -52,9 +56,14 @@ def main():
         screen.fill(pygame.Color('gray'))
 
         # TODO: Move the ball
-        ball.move()
+        #for i in range(10):
+        
+        for ball in balls:
+            ball.draw()
+            
         # TODO: Draw the ball
-        ball.draw()
+            ball.move()
+            
         pygame.display.update()
 
 
